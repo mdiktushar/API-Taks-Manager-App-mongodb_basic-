@@ -1,0 +1,1 @@
+/Users/MDTus/mongodb/bin/mongod.exe --dbpath=/Users/MDTus/mongodb-data
