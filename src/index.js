@@ -77,22 +77,15 @@ app.patch('/users/:id', async (req, res) =>{
     }
 })
 
-app.patch('/tasks/:id', async (req, res) => {
-    const updates = Object.keys(req.body);
-    const allowedUpdates = ['description', 'completed'];
-    const isValidOperation = updates.every((update)=>allowedUpdates.includes(update));
-
-    if(!isValidOperation)
-        return res.status(400).send({error: "invalid task"});
-    
+app.delete('/users/:id', async (req, res) => {
     try {
-        const task = await Tasks.findByIdAndUpdate(req.params.id, req.body, {new: true, runValidators: true})
-        if (!task){
-            return res.status(404).send();
+        const user = await User.findByIdAndDelete(req.params.id)
+        if (!user) {
+            return res.status(404).send()
         }
-        res.send(task);
-    } catch(e) {
-        res.status(400).send(e)
+        res.send(user)
+    } catch (e) {
+        res.status(500).send()
     }
 })
 
@@ -120,6 +113,39 @@ app.get('/tasks/:id', async(req, res) => {
 
 app.listen(port, ()=>{
     console.log('Server is up on post '+port);
+})
+
+
+app.patch('/tasks/:id', async (req, res) => {
+    const updates = Object.keys(req.body);
+    const allowedUpdates = ['description', 'completed'];
+    const isValidOperation = updates.every((update)=>allowedUpdates.includes(update));
+
+    if(!isValidOperation)
+        return res.status(400).send({error: "invalid task"});
+    
+    try {
+        const task = await Tasks.findByIdAndUpdate(req.params.id, req.body, {new: true, runValidators: true})
+        if (!task){
+            return res.status(404).send();
+        }
+        res.send(task);
+    } catch(e) {
+        res.status(400).send(e)
+    }
+})
+
+app.delete('/tasks/:id', async (req, res) => {
+    
+    try {
+        const task = await Tasks.findByIdAndDelete(req.params.id);
+        if(!task) {
+            return res.status(404).send();
+        }
+        res.send(task);
+    }catch(e) {
+        res.status(500).send();
+    }
 })
 
 //nodemon src/index.js
