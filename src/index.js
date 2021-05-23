@@ -15,6 +15,18 @@ app.listen(port, ()=>{
     console.log('Server is up on post '+port);
 })
 
+// const bcrypt = require('bcryptjs')
+// const myfunction = async () =>{
+//     const password = 'tushar123'
+//     const hashedPassword = await bcrypt.hash(password, 8);
+//     console.log(password)
+//     console.log(hashedPassword)
+
+//     const isMatch = await bcrypt.compare('tushar123', hashedPassword)
+//     console.log(isMatch);
+// }
+
+// myfunction()
 
 //nodemon src/index.js
 //npm run start
