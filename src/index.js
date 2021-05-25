@@ -6,8 +6,22 @@ const taskRouter = require('./routers/task');
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(express.json());
+// app.use((req, res, next) => {
+//     if (req.method == 'GET') {
+//         res.send('Get request are disable')
+//     } else {
+//         next()
+//     }
+// })
 
+// maintenance Function
+// app.use((req, res, next) => {
+
+//     res.status(503).send('The site is under maintenance please try back soon')
+
+// })
+
+app.use(express.json());
 app.use(userRouter);
 app.use(taskRouter);
 
