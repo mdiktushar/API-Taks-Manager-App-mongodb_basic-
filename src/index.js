@@ -51,6 +51,22 @@ app.listen(port, ()=>{
 
 // myfunction()
 
+
+const Task = require('./models/task')
+const User = require('./models/user')
+const main = async () => {
+    // const task = await Task.findById('60affd6015c06b1e8cb44834')
+    // await task.populate('owner').execPopulate()
+    // console.log(task.owner)
+
+    const user = await User.findById('60affcd915c06b1e8cb44831')
+    await user.populate('tasks').execPopulate()
+    console.log(user.tasks)
+
+}
+
+main()
+
 //nodemon src/index.js
 //npm run start
 //npm run dev
